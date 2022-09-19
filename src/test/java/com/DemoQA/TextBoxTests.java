@@ -26,12 +26,14 @@ public class TextBoxTests {
         $("[id=lastName]").setValue(" Фамили");
         $("[id=userEmail]").setValue("User@email.com");
         $("[id=userNumber]").setValue("899900000");
+
         $("#subjectsInput").setValue("a").pressEnter().setValue("i").pressEnter().setValue("m").pressEnter();
-
+        $("[id=currentAddress]").setValue(" 221b \n Baker St, \n  London, Grate Britain ");
+        //$("[id=dateOfBirthInput]").click();
+        //$("#subjectsInput").selectOption("May");
 
 
     }
 
-    private void step() {
-    }
+
 }
