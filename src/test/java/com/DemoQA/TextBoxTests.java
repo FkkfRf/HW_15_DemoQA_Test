@@ -25,8 +25,13 @@ public class TextBoxTests {
         $("[id=firstName]").setValue("Nимя");
         $("[id=lastName]").setValue(" Фамили");
         $("[id=userEmail]").setValue("User@email.com");
-        $("[id=userNumber]").setValue("8999000000111");
+        $("[id=userNumber]").setValue("899900000");
+        $("#subjectsInput").setValue("a").pressEnter().setValue("i").pressEnter().setValue("m").pressEnter();
 
 
+
+    }
+
+    private void step() {
     }
 }
