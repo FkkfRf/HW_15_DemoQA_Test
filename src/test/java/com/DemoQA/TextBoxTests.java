@@ -1,8 +1,10 @@
 package com.DemoQA;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.selector.ByText;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -22,17 +24,18 @@ public class TextBoxTests {
     @Test
     void fillFormTest(){
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Nимя");
-        $("[id=lastName]").setValue(" Фамили");
-        $("[id=userEmail]").setValue("User@email.com");
-        $("[id=userNumber]").setValue("899900000");
-
+        $("#firstName").setValue("Nимя");
+        $("#lastName").setValue(" Фамили");
+        $("#userEmail").setValue("User@email.com");
+        $(By.name("gender")).selectRadio("Male").click();
+        $("#gender-radio-3").click();
+        $("#userNumber").setValue("8999000001");
+        $("#uploadPicture").uploadFromClasspath("ForDemoQA.txt");
         $("#subjectsInput").setValue("a").pressEnter().setValue("i").pressEnter().setValue("m").pressEnter();
-        $("[id=currentAddress]").setValue(" 221b \n Baker St, \n  London, Grate Britain ");
-        //$("[id=dateOfBirthInput]").click();
+        $("#currentAddress").setValue(" 221b \n Baker St, \n  London, Grate Britain ");
+        $("#dateOfBirthInput").click();
         //$("#subjectsInput").selectOption("May");
-
-
+        $("#submit").click();
     }
 
 
