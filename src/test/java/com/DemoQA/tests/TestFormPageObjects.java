@@ -4,9 +4,7 @@ import com.DemoQA.pages.TestFormPage;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.by;
 import static com.codeborne.selenide.Selectors.byText;
@@ -51,8 +49,7 @@ public class TestFormPageObjects {
         $(byText("Karnal")).click();
         $("#submit").click();
 
-        $(".modal-dialog").should(appear);
-        $(".modal-title").shouldHave(text("Thanks for submitting the form"));
+        TestFormPage.checkResultTableVisible();
 
         $(".table-responsive").$(byText("Student Name"))
                 .parent().shouldHave((text("StudentName StudentLastName")));
@@ -90,8 +87,8 @@ public class TestFormPageObjects {
 
         $("#submit").click();
 
-        $(".modal-dialog").should(appear);
-        $(".modal-title").shouldHave(text("Thanks for submitting the form"));
+        TestFormPage.checkResultTableVisible();
+
 
         $(".table-responsive").$(byText("Student Name"))
                 .parent().shouldHave((text("StudentName StudentLastName")));

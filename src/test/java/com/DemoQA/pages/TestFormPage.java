@@ -1,8 +1,8 @@
 package com.DemoQA.pages;
 
         import com.DemoQA.pages.components.CalendarComponent;
+        import com.DemoQA.pages.components.ResultTableComponent;
         import com.codeborne.selenide.SelenideElement;
-        import org.openqa.selenium.By;
 
         import static com.codeborne.selenide.Condition.text;
         import static com.codeborne.selenide.Selectors.byText;
@@ -12,6 +12,8 @@ package com.DemoQA.pages;
 public class TestFormPage {
     //______Elements
     private CalendarComponent calendarComponent = new CalendarComponent();
+    private ResultTableComponent resultTableComponent = new ResultTableComponent();
+    private final static String TITLE_TEXT = "Student Registration Form";
     private SelenideElement
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
@@ -22,7 +24,7 @@ public class TestFormPage {
     //______Metods
     public TestFormPage openPage(){
         open("/automation-practice-form");
-        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        $(".practice-form-wrapper").shouldHave(text(TITLE_TEXT));
 
         executeJavaScript("$('footer').remove()");
         executeJavaScript("$('#fixedban').remove()");
@@ -56,6 +58,10 @@ public class TestFormPage {
     public TestFormPage setBirthDate(String day, String month, String year){
         $("#dateOfBirthInput").click();
         calendarComponent.setDate(day,month,year);
+        return this;
+    }
+    public TestFormPage checkResultTableVisible(){
+        resultTableComponent.checkVisible();
         return this;
     }
 }
