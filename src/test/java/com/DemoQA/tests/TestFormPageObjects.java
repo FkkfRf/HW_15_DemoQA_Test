@@ -27,19 +27,15 @@ public class TestFormPageObjects {
     }
     @Test
     void fillFormTest(){
-        TestFormPage.openPage();
-        TestFormPage.setFirstName("StudentName");
-        TestFormPage.setLastName("StudentLastName");
-        TestFormPage.setEmale("User@email.com");
-        TestFormPage.setGender("Female");
+        TestFormPage.openPage()
+                .setFirstName("StudentName")
+                .setLastName("StudentLastName")
+                .setEmale("User@email.com")
+                .setGender("Female")
+                .setNumber("8299000001")
+                .setBirthDate("29", "May","1975");
 
 
-        $("#userNumber").setValue("8299000001");
-
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption("May");
-        $(By.className("react-datepicker__year-select")).selectOption("1975");
-        $(".react-datepicker__day--029:not(.react-datepicker__day--outside-month").click();
 
         $("#uploadPicture").uploadFromClasspath("ForDemoQA.txt");
 
@@ -84,13 +80,13 @@ public class TestFormPageObjects {
 
     @Test
     void fillFormMinimumDataTest(){
-        TestFormPage.openPage();
-        TestFormPage.setFirstName("StudentName");
-        TestFormPage.setLastName("StudentLastName");
-        TestFormPage.setEmale("User@email.com");
-        TestFormPage.setGender("Female");
-
-        $("#userNumber").setValue("8299000001");
+        TestFormPage.openPage()
+                .setFirstName("StudentName")
+                .setLastName("StudentLastName")
+                .setEmale("User@email.com")
+                .setGender("Female")
+                .setNumber("8299000001")
+                .setBirthDate("29", "May","1975");
 
         $("#submit").click();
 
