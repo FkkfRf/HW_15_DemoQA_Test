@@ -1,7 +1,7 @@
 package com.DemoQA.pages;
 
         import com.DemoQA.pages.components.CalendarComponent;
-        import com.DemoQA.pages.components.ResultTableComponent;
+        import com.DemoQA.pages.components.ResultsModal;
         import com.codeborne.selenide.SelenideElement;
 
         import static com.codeborne.selenide.Condition.text;
@@ -12,7 +12,7 @@ package com.DemoQA.pages;
 public class TestFormPage {
     //______Elements
     private CalendarComponent calendarComponent = new CalendarComponent();
-    private ResultTableComponent resultTableComponent = new ResultTableComponent();
+    private ResultsModal resultsModal = new ResultsModal();
     private final static String TITLE_TEXT = "Student Registration Form";
     private SelenideElement
             firstNameInput = $("#firstName"),
@@ -61,7 +61,11 @@ public class TestFormPage {
         return this;
     }
     public TestFormPage checkResultTableVisible(){
-        resultTableComponent.checkVisible();
+        resultsModal.checkVisible();
+        return this;
+    }
+    public TestFormPage checkResult(String key, String value){
+        resultsModal.checkResult(key, value);
         return this;
     }
 }

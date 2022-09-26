@@ -33,8 +33,6 @@ public class TestFormPageObjects {
                 .setNumber("8299000001")
                 .setBirthDate("29", "May","1975");
 
-
-
         $("#uploadPicture").uploadFromClasspath("ForDemoQA.txt");
 
         $("#subjectsInput").setValue("a").pressEnter().setValue("i").pressEnter().setValue("m").pressEnter();
@@ -49,18 +47,13 @@ public class TestFormPageObjects {
         $(byText("Karnal")).click();
         $("#submit").click();
 
-        TestFormPage.checkResultTableVisible();
+        TestFormPage.checkResultTableVisible()
+                .checkResult("Student Name","StudentName StudentLastName")
+                .checkResult("Gender","Female")
+                .checkResult("Student Email","User@email.com")
+                .checkResult("Mobile","8299000001")
+                .checkResult("Date of Birth","29 May,1975");
 
-        $(".table-responsive").$(byText("Student Name"))
-                .parent().shouldHave((text("StudentName StudentLastName")));
-        $(".table-responsive").$(byText("Student Email"))
-                .parent().shouldHave((text("User@email.com")));
-        $(".table-responsive").$(byText("Gender"))
-                .parent().shouldHave((text("Female")));
-        $(".table-responsive").$(byText("Mobile"))
-                .parent().shouldHave((text("8299000001")));
-        $(".table-responsive").$(byText("Date of Birth"))
-                .parent().shouldHave((text("29 May,1975")));
         $(".table-responsive").$(byText("Subjects"))
                 .parent().shouldHave((text("Maths, Hindi, Chemistry")));
         $(".table-responsive").$(byText("Hobbies"))
@@ -87,15 +80,12 @@ public class TestFormPageObjects {
 
         $("#submit").click();
 
-        TestFormPage.checkResultTableVisible();
-
-
-        $(".table-responsive").$(byText("Student Name"))
-                .parent().shouldHave((text("StudentName StudentLastName")));
-        $(".table-responsive").$(byText("Gender"))
-                .parent().shouldHave((text("Female")));
-        $(".table-responsive").$(byText("Mobile"))
-                .parent().shouldHave((text("8299000001")));
+        TestFormPage.checkResultTableVisible()
+                .checkResult("Student Name","StudentName StudentLastName")
+                .checkResult("Gender","Female")
+                .checkResult("Student Email","User@email.com")
+                .checkResult("Mobile","8299000001")
+                .checkResult("Date of Birth","29 May,1975");
 
     }
 }
