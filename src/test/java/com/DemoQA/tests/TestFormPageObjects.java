@@ -2,17 +2,31 @@ package com.DemoQA.tests;
 
 import com.DemoQA.pages.TestFormPage;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.by;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
 public class TestFormPageObjects {
     TestFormPage TestFormPage= new TestFormPage();
+    private SelenideElement
+            firstNameInput = $("#firstName"),
+            lastNameInput = $("#lastName"),
+            genterWrapperInput = $("#genterWrapper"),
+            userNumberInput = $("#userNumber"),
+            userEmailInput = $("#userEmail"),
+            birthInput = $("#dateOfBirthInput"),
+            subjectInput = $("#subjectsInput"),
+            stateItemInput = $("#state"),
+            cityItemInput = $("#city"),
+            fileUploadInput = $("#uploadPicture"),
+            curentAddressInput = $("#currentAddress"),
+            hobbiesWrapperInput = $("#hobbiesWrapper"),
+            modalDialogInput = $(".modal-dialog"),
+            modaleTitleInput = $(".modal-title"),
+            modalTitleResponsiveInput = $(".table-responsive");
 
     @BeforeAll
     static void setUp() {
@@ -24,68 +38,38 @@ public class TestFormPageObjects {
 
     }
     @Test
-    void fillFormTest(){
-        TestFormPage.openPage()
-                .setFirstName("StudentName")
-                .setLastName("StudentLastName")
-                .setEmale("User@email.com")
-                .setGender("Female")
-                .setNumber("8299000001")
-                .setBirthDate("29", "May","1975");
-
-        $("#uploadPicture").uploadFromClasspath("ForDemoQA.txt");
-
-        $("#subjectsInput").setValue("a").pressEnter().setValue("i").pressEnter().setValue("m").pressEnter();
-        $("#hobbiesWrapper").$(byText("Sports")).click();
-        $(byText("Music")).click();
-        $(by("for","hobbies-checkbox-2")).click();
-
-        $("#currentAddress").setValue(" 221b \n Baker St, \n  London, Grate Britain ");
-        $("#state").click();
-        $(byText("Haryana")).click();
-        $("#city").click();
-        $(byText("Karnal")).click();
-        $("#submit").click();
-
-        TestFormPage.checkResultTableVisible()
-                .checkResult("Student Name","StudentName StudentLastName")
-                .checkResult("Gender","Female")
-                .checkResult("Student Email","User@email.com")
-                .checkResult("Mobile","8299000001")
-                .checkResult("Date of Birth","29 May,1975");
-
-        $(".table-responsive").$(byText("Subjects"))
-                .parent().shouldHave((text("Maths, Hindi, Chemistry")));
-        $(".table-responsive").$(byText("Hobbies"))
-                .parent().shouldHave((text("Sports, Music, Reading")));
-        $(".table-responsive").$(byText("Picture"))
-                .parent().shouldHave((text("ForDemoQA.txt")));
-        $(".table-responsive").$(byText("Address"))
-                .parent().shouldHave((text("221b Baker St, London, Grate Britain")));
-        $(".table-responsive").$(byText("State and City"))
-                .parent().shouldHave((text("Haryana Karnal")));
-    }
-
-
-
-    @Test
     void fillFormMinimumDataTest(){
         TestFormPage.openPage()
-                .setFirstName("StudentName")
-                .setLastName("StudentLastName")
-                .setEmale("User@email.com")
-                .setGender("Female")
-                .setNumber("8299000001")
-                .setBirthDate("29", "May","1975");
+                .setTextField(firstNameInput , "StudentName")
+                .setTextField(lastNameInput , "StudentLastName")
+                .setTextField(userEmailInput ,"User@email.com")
+                .setCustomControl(genterWrapperInput , "Female")
+                .setTextField(userNumberInput ,"8299000001")
+                .setSubjectText(subjectInput ,"a")
+                .setSubjectText(subjectInput ,"i")
+                .setSubjectText(subjectInput ,"m")
+                .setCustomControl(hobbiesWrapperInput , "Sports")
+                .setCustomControl(hobbiesWrapperInput , "Music")
+                .setCustomControl(hobbiesWrapperInput ,"Reading")
+                .setSelectedItem(stateItemInput ,"Haryana" )
+                .setSelectedItem(cityItemInput, "Karnal" )
+                .setBirthDate(birthInput, "29", "May","1975")
+                .setUploadFile(fileUploadInput , "ForDemoQA.txt")
+                .setTextField(curentAddressInput , " 221b \n Baker St, \n  London, Grate Britain ");
 
         $("#submit").click();
 
-        TestFormPage.checkResultTableVisible()
-                .checkResult("Student Name","StudentName StudentLastName")
-                .checkResult("Gender","Female")
-                .checkResult("Student Email","User@email.com")
-                .checkResult("Mobile","8299000001")
-                .checkResult("Date of Birth","29 May,1975");
+        TestFormPage.checkResultTableVisible(modalDialogInput, modaleTitleInput)
+                .checkResult(modalTitleResponsiveInput , "Student Name","StudentName StudentLastName")
+                .checkResult(modalTitleResponsiveInput , "Gender","Female")
+                .checkResult(modalTitleResponsiveInput , "Student Email","User@email.com")
+                .checkResult(modalTitleResponsiveInput , "Mobile","8299000001")
+                .checkResult(modalTitleResponsiveInput , "Date of Birth","29 May,1975")
+                .checkResult(modalTitleResponsiveInput , "Subjects" ,"Maths, Hindi, Chemistry")
+                .checkResult(modalTitleResponsiveInput , "State and City" , "Haryana Karnal")
+                .checkResult(modalTitleResponsiveInput , "Hobbies" , "Sports, Music, Reading")
+                .checkResult(modalTitleResponsiveInput , "Picture" , "ForDemoQA.txt")
+                .checkResult(modalTitleResponsiveInput , "Address" , "221b Baker St, London, Grate Britain");
 
     }
 }
