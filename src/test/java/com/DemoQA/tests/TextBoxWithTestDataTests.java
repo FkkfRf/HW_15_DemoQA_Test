@@ -1,37 +1,21 @@
 package com.DemoQA.tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.by;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-
-public class TextBoxTests {
-
-    @BeforeAll
-    static void setUp() {
-        // для каждого теста открываем форму
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1986";
-        // держим браузер открытым
-        Configuration.holdBrowserOpen = true;
-
-    }
-
-    @Test
+public class TextBoxWithTestDataTests extends TestBase{
+        @Test
     void fillFormTest(){
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-
-        //____убрать рекламу_________________пометка для себя_
         executeJavaScript("$('footer').remove()");
         executeJavaScript("$('#fixedban').remove()");
-        //________________________________________________
 
         $("#firstName").setValue("StudentName ");
         $("#lastName").setValue(" StudentLastName");

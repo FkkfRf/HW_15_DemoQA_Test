@@ -1,75 +1,43 @@
 package com.DemoQA.tests;
 
 import com.DemoQA.pages.TestFormPage;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import static com.codeborne.selenide.Selenide.*;
-
-
-public class TestFormPageObjects {
+public class TestFormPageObjects extends TestBase{
     TestFormPage TestFormPage= new TestFormPage();
-    private SelenideElement
-            firstNameInput = $("#firstName"),
-            lastNameInput = $("#lastName"),
-            genterWrapperInput = $("#genterWrapper"),
-            userNumberInput = $("#userNumber"),
-            userEmailInput = $("#userEmail"),
-            birthInput = $("#dateOfBirthInput"),
-            subjectInput = $("#subjectsInput"),
-            stateItemInput = $("#state"),
-            cityItemInput = $("#city"),
-            fileUploadInput = $("#uploadPicture"),
-            curentAddressInput = $("#currentAddress"),
-            hobbiesWrapperInput = $("#hobbiesWrapper"),
-            modalDialogInput = $(".modal-dialog"),
-            modaleTitleInput = $(".modal-title"),
-            modalTitleResponsiveInput = $(".table-responsive");
-
-    @BeforeAll
-    static void setUp() {
-        // для каждого теста открываем форму
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1986";
-        // держим браузер открытым
-        Configuration.holdBrowserOpen = true;
-
-    }
     @Test
     void fillFormMinimumDataTest(){
         TestFormPage.openPage()
-                .setTextField(firstNameInput , "StudentName")
-                .setTextField(lastNameInput , "StudentLastName")
-                .setTextField(userEmailInput ,"User@email.com")
-                .setCustomControl(genterWrapperInput , "Female")
-                .setTextField(userNumberInput ,"8299000001")
-                .setSubjectText(subjectInput ,"a")
-                .setSubjectText(subjectInput ,"i")
-                .setSubjectText(subjectInput ,"m")
-                .setCustomControl(hobbiesWrapperInput , "Sports")
-                .setCustomControl(hobbiesWrapperInput , "Music")
-                .setCustomControl(hobbiesWrapperInput ,"Reading")
-                .setSelectedItem(stateItemInput ,"Haryana" )
-                .setSelectedItem(cityItemInput, "Karnal" )
-                .setBirthDate(birthInput, "29", "May","1975")
-                .setUploadFile(fileUploadInput , "ForDemoQA.txt")
-                .setTextField(curentAddressInput , " 221b \n Baker St, \n  London, Grate Britain ");
+                .setTextField(firstNameInput , firstName)
+                .setTextField(lastNameInput , lastName)
+                .setTextField(userEmailInput ,userEmail)
+                .setCustomControl(genterWrapperInput , gender)
+                .setTextField(userNumberInput ,phoneNumber)
+                .setSubjectText(subjectInput ,subject1)
+                .setSubjectText(subjectInput ,subject2)
+                .setSubjectText(subjectInput ,subject3)
+                .setCustomControl(hobbiesWrapperInput , hobbies1)
+                .setCustomControl(hobbiesWrapperInput , hobbies2)
+                .setCustomControl(hobbiesWrapperInput ,hobbies3)
+                .setSelectedItem(stateItemInput ,state )
+                .setSelectedItem(cityItemInput, city )
+                .setBirthDate(birthInput, dayC,monthC,yearC)
+                .setUploadFile(fileUploadInput , fileUpload)
+                .setTextField(curentAddressInput , address);
 
         $("#submit").click();
 
         TestFormPage.checkResultTableVisible(modalDialogInput, modaleTitleInput)
-                .checkResult(modalTitleResponsiveInput , "Student Name","StudentName StudentLastName")
-                .checkResult(modalTitleResponsiveInput , "Gender","Female")
-                .checkResult(modalTitleResponsiveInput , "Student Email","User@email.com")
-                .checkResult(modalTitleResponsiveInput , "Mobile","8299000001")
-                .checkResult(modalTitleResponsiveInput , "Date of Birth","29 May,1975")
+                .checkResult(modalTitleResponsiveInput , "Student Name",firstName+" "+lastName)
+                .checkResult(modalTitleResponsiveInput , "Gender",gender)
+                .checkResult(modalTitleResponsiveInput , "Student Email",userEmail)
+                .checkResult(modalTitleResponsiveInput , "Mobile",phoneNumber)
+                .checkResult(modalTitleResponsiveInput , "Date of Birth",dayC + " " + monthC + "," + yearC)
                 .checkResult(modalTitleResponsiveInput , "Subjects" ,"Maths, Hindi, Chemistry")
-                .checkResult(modalTitleResponsiveInput , "State and City" , "Haryana Karnal")
-                .checkResult(modalTitleResponsiveInput , "Hobbies" , "Sports, Music, Reading")
-                .checkResult(modalTitleResponsiveInput , "Picture" , "ForDemoQA.txt")
-                .checkResult(modalTitleResponsiveInput , "Address" , "221b Baker St, London, Grate Britain");
+                .checkResult(modalTitleResponsiveInput , "State and City" , state + " " + city)
+                .checkResult(modalTitleResponsiveInput , "Hobbies" , hobbies1 + ", " + hobbies2 + ", " + hobbies3)
+                .checkResult(modalTitleResponsiveInput , "Picture" , fileUpload)
+                .checkResult(modalTitleResponsiveInput , "Address" , address);
 
     }
 }

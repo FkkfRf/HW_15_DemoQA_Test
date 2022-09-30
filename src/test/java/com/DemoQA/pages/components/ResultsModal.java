@@ -1,11 +1,10 @@
 package com.DemoQA.pages.components;
 
 import com.codeborne.selenide.SelenideElement;
-
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
+
 public class ResultsModal {
     private final static String TITLE_TEXT = "Thanks for submitting the form";
     public ResultsModal checkVisible(SelenideElement modalDialog, SelenideElement modalTitle){
