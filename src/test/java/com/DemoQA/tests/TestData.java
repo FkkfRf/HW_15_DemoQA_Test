@@ -2,30 +2,33 @@ package com.DemoQA.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import java.time.LocalDate;
+import java.util.Locale;
 import static com.DemoQA.utils.RandomUtils.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class TestData {
-   private String subjectArr[] = new String[] {"Maths" , "Accounting",
+    Faker fakerRu = new Faker(new Locale("ru"));
+    Faker faker = new Faker();
+   private final String[] subjectArr = new String[] {"Maths" , "Accounting",
             "Arts" , "Social Studies" ,
             "Biology" , "Physics" ,
             "Chemistry" , "Computer Science" ,
             "Commerce" , "Economics" ,
             "Civics" , "Hindi" ,
             "English" , "History"};
-   private String stateArr[] = new String[] {"NCR" , "Uttar Pradesh" , "Haryana" , "Rajasthan" };
-   private String cityArr[] = new String[] {"Delhi" , "Agra", "Karnal", "Jaipur" };
-   private int arr = (int) (Math.random() * 4 );
+   private final String[] stateArr = new String[] {"NCR" , "Uttar Pradesh" , "Haryana" , "Rajasthan" };
+   private final String[] cityArr = new String[] {"Delhi" , "Agra", "Karnal", "Jaipur" };
+   private final int arr = (int) (Math.random() * 4 );
+   private static LocalDate randomD = randomBirthday();
 
-
-    private LocalDate randomD = randomBirthday();
-    String firstName = generateRandomCharString(7),
-            lastName = generateRandomCharString(10),
+    String firstName = fakerRu.name().firstName(),
+            lastName = fakerRu.name().lastName(),
             gender = "Female",
-            phoneNumber = generateRandomNumericString(10),
-            userEmail = generateRandomEmail(),
+            phoneNumber = faker.phoneNumber().subscriberNumber(10),
+            userEmail = faker.internet().emailAddress(),
             dayC = randomDay(randomD),
             monthC = randomMonth(randomD),
             yearC = randomYear(randomD),
@@ -38,7 +41,7 @@ public class TestData {
             hobbies1 = "Sports",
             hobbies2 = "Music",
             hobbies3 = "Reading",
-            address = "221b \n Baker St, \n  London, Grate Britain";
+            address = faker.address().streetAddress();
 
     public SelenideElement
             firstNameInput = $("#firstName"),

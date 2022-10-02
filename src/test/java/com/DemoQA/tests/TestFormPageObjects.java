@@ -34,7 +34,7 @@ public class TestFormPageObjects extends TestData{
                 .checkResult(modalTitleResponsiveInput , "Student Email",userEmail)
                 .checkResult(modalTitleResponsiveInput , "Mobile",phoneNumber)
                 .checkResult(modalTitleResponsiveInput , "Date of Birth",dayC + " " + monthC + "," + yearC)
-                .checkResult(modalTitleResponsiveInput , "Subjects" ,subject1)
+                .checkResult(modalTitleResponsiveInput , "Subjects" ,subject1 +", "+ subject2 +", "+ subject3)
                 .checkResult(modalTitleResponsiveInput , "State and City" , state + " " + city)
                 .checkResult(modalTitleResponsiveInput , "Hobbies" , hobbies1 + ", " + hobbies2 + ", " + hobbies3)
                 .checkResult(modalTitleResponsiveInput , "Picture" , fileUpload)
