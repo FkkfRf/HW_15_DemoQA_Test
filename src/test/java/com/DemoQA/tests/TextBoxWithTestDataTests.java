@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selectors.by;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class TextBoxWithTestDataTests extends TestBase{
+public class TextBoxWithTestDataTests {
         @Test
     void fillFormTest(){
         open("/automation-practice-form");
